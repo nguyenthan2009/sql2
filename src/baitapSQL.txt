@@ -1,0 +1,52 @@
+CREATE TABLE PHIEUXUAT(
+    SoPX int auto_increment primary key,
+    NgayXuat datetime
+);
+CREATE TABLE VATTU(
+    MAVTU varchar(50) primary key,
+    TenVTU varchar(50)
+
+);
+CREATE TABLE PHIEUXUAT_VATTU(
+SoPX int not null,
+MAVTU varchar(50) not null,
+SLxuat int not null,
+DGXuat varchar(50),
+primary key(SoPX,MAVTU),
+foreign key(SoPX) REFERENCES PHIEUXUAT(SoPX),
+foreign key(MAVTU) REFERENCES VATTU(MAVTU)
+);
+CREATE TABLE PHIEUNHAP(
+    SoPN varchar(50) primary key,
+    NgayNhap datetime
+    );
+CREATE TABLE  PHIEUNHAP_VATTU(
+    MAVTU varchar(50) not null ,
+    SoPN varchar(50) not null ,
+    DGNhap varchar(50) not null,
+    SLNhap int not null,
+    foreign key(MAVTU) references VATTU(MAVTU),
+    FOREIGN KEY(SoPN) references PHIEUNHAP(SoPN)
+
+);
+CREATE TABLE DONKH(
+        SoDH int auto_increment primary key ,
+        NgayDH datetime
+
+);
+create table DONKH_VATTU(
+    SoDH int not null ,
+    MAVTU varchar(50) not null ,
+    primary key (SoDH,MAVTU),
+    FOREIGN KEY(SoDH)REFERENCES DONKH(SoDH),
+    FOREIGN KEY (MAVTU) REFERENCES VATTU(MAVTU)
+);
+CREATE TABLE NHACC
+(
+    MANCC  varchar(50) primary key,
+    TenNCC VARCHAR(50) NOT NULL,
+    Diachi varchar(50) not null ,
+    SDT VARCHAR(13) NOT NULL
+);
+ALTER TABLE DONKH ADD MaNCC VARCHAR(50) NOT NULL;
+ALTER TABLE DONKH ADD CONSTRAINT FOREIGN KEY (MaNCC) references NHACC(MaNCC);
